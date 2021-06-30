@@ -98,9 +98,9 @@ if st.sidebar.checkbox("Family aboard analysis", False):
 
     col2.header("Parents/Children aboard")
     par_chil = col2.multiselect("Quantities", np.sort(data["Parents/Children Aboard"].unique()), key=1)
-    siblings_spouses_df = subset_by_family(data, "Parents/Children Aboard", par_chil)
+    parents_children_df = subset_by_family(data, "Parents/Children Aboard", par_chil)
     plt_fig = plt.figure()
-    sns.countplot(data=siblings_spouses_df, x="Survived", palette=["royalblue", "orangered"])
+    sns.countplot(data=parents_children_df, x="Survived", palette=["royalblue", "orangered"])
     sns.despine()
     plt.title("Survivors and non survivors")
     col2.pyplot(plt_fig, use_column_width=True)
