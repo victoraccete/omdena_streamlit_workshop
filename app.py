@@ -5,6 +5,7 @@ import plotly.express as px
 import seaborn as sns
 import numpy as np
 from joblib import load
+import sklearn
 
 TITLE = "Streamlit demonstration"
 st.title(TITLE)
