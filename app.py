@@ -1,4 +1,3 @@
-####### STEP 1 ########
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -6,7 +5,7 @@ import plotly.express as px
 import seaborn as sns
 import numpy as np
 from joblib import load
-######### STEP 2 ########
+
 TITLE = "Streamlit demonstration"
 st.title(TITLE)
 DESCRIPTION = "Survivorship analysis from the Titanic Dataset"
@@ -14,8 +13,6 @@ st.markdown(DESCRIPTION)
 st.sidebar.title(TITLE)
 st.sidebar.markdown("Choose your visualizations.")
 
-######## STEP 3 WITHOUT CACHE ###########
-####### CACHE STEP 4 #################
 @st.cache
 def load_data():
     data = pd.read_csv("titanic.csv")
@@ -31,11 +28,9 @@ def subset_by_sex(df):
     df["Survived"] = df["Survived"].astype(str)
     return df
 
-######### STEP 5 ############
 if st.sidebar.checkbox("Male and Female comparative", True):
     sex_subset = subset_by_sex(data)
     st.header("Male and female comparative")
-    ####### LATER STEP 6 #########
     if st.checkbox("Show table", False):
         st.write(sex_subset)
         pass
@@ -49,12 +44,10 @@ if st.sidebar.checkbox("Male and Female comparative", True):
         st.pyplot(plt_fig)
         pass
     else:
-        ##### STEP 6 #######
         px_fig = px.bar(sex_subset, y="Count", x="Sex", color="Survived", barmode="group")
         st.plotly_chart(px_fig)
         pass
 
-###### STEP 7 #######
 @st.cache
 def get_fares_min_max(df):
     min_fare = df['Fare'].min()
@@ -90,7 +83,6 @@ def subset_by_family(df, col, values):
         st.error("Please select values.")
     return df
 
-######## STEP 8 ########
 if st.sidebar.checkbox("Family aboard analysis", False):
     st.header("Family aboard analysis")
     col1, col2 = st.beta_columns(2)
@@ -113,12 +105,8 @@ if st.sidebar.checkbox("Family aboard analysis", False):
     plt.title("Survivors and non survivors")
     col2.pyplot(plt_fig, use_column_width=True)
 
-######### STEP 9 ##########
-def load_model():
-    clf = load('rf.joblib')
-    return clf
-clf = load_model()
 
+clf = load('rf.joblib')
 if st.sidebar.checkbox("Machine Learning: would I survive the Titanic disaster?", False):
     st.header("Would I survive the disaster?")
 
