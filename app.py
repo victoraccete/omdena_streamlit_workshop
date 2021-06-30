@@ -53,7 +53,7 @@ if st.sidebar.checkbox("Male and Female comparative", True):
 def get_fares_min_max(df):
     min_fare = df['Fare'].min()
     max_fare = df['Fare'].max()
-    return min_fare, max_fare
+    return float(min_fare), float(max_fare)
 
 def subset_by_fare(df, lower, upper):
     df = df[df['Fare'] >= lower]
@@ -63,7 +63,7 @@ def subset_by_fare(df, lower, upper):
 if st.sidebar.checkbox("Analysis by fares", False):
     st.header("Analysis by fares")
     min_fare, max_fare = get_fares_min_max(data)
-    lower, upper = st.slider("Fare range", min_fare, max_fare, (100.0, max_fare/2))
+    lower, upper = st.slider("Fare range", min_fare, max_fare, (100.0, float(max_fare/2)))
     fare_subset = subset_by_fare(data, lower, upper)
     st.write(f"Number of observations: {fare_subset.shape[0]}")
     if st.checkbox("Show table", False, key=0): # TRY WITHOUT KEY FIRST
